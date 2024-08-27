@@ -21,7 +21,7 @@ def get_sales_data():
     Get sales figures input from the user.
     Run a while loop to collect a valid string of data from the user
     via the terminal, which must be a string of 6 numbers separated
-    by commas. The loop will repeatedly request data, until it is valid. 
+    by commas. The loop will repeatedly request data, until it is valid.
     """
     while True:
         print("Please enter sales data from the last market.")
@@ -31,7 +31,7 @@ def get_sales_data():
         data_str = input("Enter your data here: ")
 
         sales_data = data_str.split(",")
-        validate_data(sales_data)
+#        validate_data(sales_data)
         
         if validate_data(sales_data):
             print("Data is valid!")
@@ -40,7 +40,7 @@ def get_sales_data():
     return sales_data
 
 def validate_data(values):
-    """ 
+    """
     Inside the try, converts all string values into integers.
     Raises ValueError if strings cannot be converted into int,
     or if there aren't exactly 6 values.
@@ -60,7 +60,7 @@ def validate_data(values):
 
 def update_worksheet(data, worksheet):
     """
-    Recieves a list of ontegers to be inserted into a worksheet
+    Receives a list of integers to be inserted into a worksheet
     Update the relevant worksheet with the data provided
     """
     print(f"Updating {worksheet} worksheet...\n")
@@ -88,15 +88,21 @@ def calculate_surplus_data(sales_row):
 
     return surplus_data
 
-    def get_last_5_entries_sales():
-        """
-        Collects columns of data from sales worksheet, collecting
-        the last 5 entries for each sandwich nd returns the data
-        as a list of lists.
-        """
-        sales = SHEET.worksheet("sales")
-        column = sales.col_values(3)
-        print(column)
+def get_last_5_entries_sales():
+    """
+    Collects columns of data from sales worksheet, collecting
+    the last 5 entries for each sandwich and returns the data
+    as a list of lists.
+    """
+    sales = SHEET.worksheet("sales")
+#    column = sales.col_values(3)
+#    print(column)
+
+    columns = []
+    for ind in range(1, 7):
+        column = sales.col_values(ind)
+        columns.append(column)
+    pprint(columns)
 
 
 def main():
@@ -113,4 +119,5 @@ def main():
 
 print("Welcome to Love Sandwiches Data Automation")
 #main()
+
 get_last_5_entries_sales()
